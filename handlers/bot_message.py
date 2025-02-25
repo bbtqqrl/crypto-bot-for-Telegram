@@ -223,7 +223,7 @@ async def handle_crypto_request(message: Message):
                 if not_list_crypto_data == 429:
                     await message.answer(text_language_dict_429[language])
                 elif not_list_crypto_data:
-                    data = bot_func.get_text(not_list_crypto_data)
+                    data = bot_func.get_text(not_list_crypto_data, language)
                     text = data[0]
                     crypto_name = data[1]
                     img = await crypto_requests.get_crypto_chart(not_list_crypto_data.get('id'), language)
