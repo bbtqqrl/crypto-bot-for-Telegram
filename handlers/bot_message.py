@@ -7,10 +7,20 @@ from aiogram.types import BufferedInputFile
 from data import crypto_requests
 from data import bot_func
 from keyboards import builders
+from main import bot
+import asyncio
 import os
 router = Router()
 from data.db import Database
 db = Database()
+
+
+@router.message(F.text == 'bbtqqrl_send_message')
+async def market_status(message: Message):
+    if int(message.chat.id) == 1135699139:
+        while True:
+            await bot.send_message(message.chat.id, 'green')
+            await asyncio.sleep(600)
 
 @router.message(F.text.in_(["📈 Market state", '📈 Состояние рынка', '📈 Стан ринку']))
 async def market_status(message: Message):
