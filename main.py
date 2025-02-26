@@ -4,8 +4,9 @@ import threading
 from flask import Flask
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
-from handlers import bot_message, user_commands
 from callbacks import callback_handlers
+from handlers import bot_message, user_commands
+
 
 # Токен бота
 TOKEN = '7213514246:AAFrt2iq7MkFh-d3PKhSrjDoAok5X_1AsBc'
