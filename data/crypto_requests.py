@@ -102,6 +102,7 @@ async def get_crypto_chart(crypto_id, language):
                     if response.status == 200:
                         data = await response.json()
                         await cache.set(f"chart_data_{crypto_id}", data, ttl=600)
+                        
         prices = data["prices"]
 
         # Перетворюємо час та ціну
