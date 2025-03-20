@@ -1,10 +1,11 @@
 import asyncio
-from aiogram import Bot, Dispatcher
-import threading
 import os
-
-# Ініціалізація бота 
-bot = Bot('7213514246:AAFrt2iq7MkFh-d3PKhSrjDoAok5X_1AsBc', default=DefaultBotProperties(parse_mode='HTML'))
+from aiogram import Bot, Dispatcher
+from aiogram.client.default import DefaultBotProperties
+from dotenv import load_dotenv
+load_dotenv()
+API_KEY = os.getenv("BOT_API_KEY")
+bot = Bot(API_KEY, default=DefaultBotProperties(parse_mode='HTML'))
 dp = Dispatcher()
 
 # Ініціалізація Flask

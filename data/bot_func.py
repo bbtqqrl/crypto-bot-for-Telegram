@@ -55,7 +55,8 @@ def get_text(data, language):
     if date:
         date = date.split('T')
         date = str(date[0]) +'' + str(date[1][0:8] +'' + 'UTC +2')
-    return [text_language_dict[language], name]
+    text = get_coin_text(language, name, symbol, price, market_cap, high_24h, low_24h, change_percentage_24h, ath_date, ath, atl_date, atl, total_volume, circulating_supply, date)
+    return [text, name]
     
 
 def get_cache_text(data, language):
@@ -86,7 +87,8 @@ def get_cache_text(data, language):
     if date:
         date = date.split('T')
         date = str(date[0]) +'' + str(date[1][0:8] +'' + 'UTC +2')
-    return [text_language_dict[language], name]
+    text = get_coin_text(language, name, symbol, price, market_cap, high_24h, low_24h, change_percentage_24h, ath_date, ath, atl_date, atl, total_volume, circulating_supply, date)
+    return [text, name]
 
 
 def find_crypto(crypto_list, target):
@@ -94,38 +96,39 @@ def find_crypto(crypto_list, target):
     return crypto_dict.get(target.lower().strip(), None)
 
 
-text_language_dict = {
-    'ua' : (f"📌 <b>{name}</b> (<code>{symbol}</code>)\n\n"
-            f"💰 <b>Ціна:</b> {price} USD\n"
-            f"📊 <b>Ринкова капіталізація:</b> {market_cap} USD\n\n"
-            f"📈 <b>Максимальна ціна за 24 години:</b> {high_24h} USD\n"
-            f"📉 <b>Мінімальна ціна за 24 години:</b> {low_24h} USD\n"
-            f"🔄 <b>Зміна за 24 години:</b> {change_percentage_24h}%\n\n"
-            f"📅 <b>Дата ATH:</b> {ath_date} ({ath} USD)\n"
-            f"📉 <b>Дата ATL:</b> {atl_date} ({atl} USD)\n\n"
-            f"🔄 <b>Загальний обсяг торгів:</b> {total_volume} USD\n"
-            f"🔄 <b>Кількість в обігу:</b> {circulating_supply} {symbol}\n"
-            f"📅 <b>Останнє оновлення:</b> {date}\n"),
-    'eng' : (f"📌 <b>{name}</b> (<code>{symbol}</code>)\n\n"
-            f"💰 <b>Price:</b> {price} USD\n"
-            f"📊 <b>Market Capitalization:</b> {market_cap} USD\n\n"
-            f"📈 <b>24h High:</b> {high_24h} USD\n"
-            f"📉 <b>24h Low:</b> {low_24h} USD\n"
-            f"🔄 <b>24h Change:</b> {change_percentage_24h}%\n\n"
-            f"📅 <b>ATH Date:</b> {ath_date} ({ath} USD)\n"
-            f"📉 <b>ATL Date:</b> {atl_date} ({atl} USD)\n\n"
-            f"🔄 <b>Total Trading Volume:</b> {total_volume} USD\n"
-            f"🔄 <b>Circulating Supply:</b> {circulating_supply} {symbol}\n"
-            f"📅 <b>Last Update:</b> {date}\n"),
-    'ru'  : (f"📌 <b>{name}</b> (<code>{symbol}</code>)\n\n"
-            f"💰 <b>Цена:</b> {price} USD\n"
-            f"📊 <b>Рыночная капитализация:</b> {market_cap} USD\n\n"
-            f"📈 <b>Максимальная цена за 24 часа:</b> {high_24h} USD\n"
-            f"📉 <b>Минимальная цена за 24 часа:</b> {low_24h} USD\n"
-            f"🔄 <b>Изменение за 24 часа:</b> {change_percentage_24h}%\n\n"
-            f"📅 <b>Дата ATH:</b> {ath_date} ({ath} USD)\n"
-            f"📉 <b>Дата ATL:</b> {atl_date} ({atl} USD)\n\n"
-            f"🔄 <b>Общий объем торгов:</b> {total_volume} USD\n"
-            f"🔄 <b>Количество в обращении:</b> {circulating_supply} {symbol}\n"
-            f"📅 <b>Последнее обновление:</b> {date}\n")
-}
+def get_coin_text(language, name, symbol, price, market_cap, high_24h, low_24h, change_percentage_24h, ath_date, ath, atl_date, atl, total_volume, circulating_supply, date):
+    text_language_dict = {
+        'ua' : (f"📌 <b>{name}</b> (<code>{symbol}</code>)\n\n"
+                f"💰 <b>Ціна:</b> {price} USD\n"
+                f"📊 <b>Ринкова капіталізація:</b> {market_cap} USD\n\n"
+                f"📈 <b>Максимальна ціна за 24 години:</b> {high_24h} USD\n"
+                f"📉 <b>Мінімальна ціна за 24 години:</b> {low_24h} USD\n"
+                f"🔄 <b>Зміна за 24 години:</b> {change_percentage_24h}%\n\n"
+                f"📅 <b>Дата ATH:</b> {ath_date} ({ath} USD)\n"
+                f"📉 <b>Дата ATL:</b> {atl_date} ({atl} USD)\n\n"
+                f"🔄 <b>Загальний обсяг торгів:</b> {total_volume} USD\n"
+                f"🔄 <b>Кількість в обігу:</b> {circulating_supply} {symbol}\n"
+                f"📅 <b>Останнє оновлення:</b> {date}\n"),
+        'eng' : (f"📌 <b>{name}</b> (<code>{symbol}</code>)\n\n"
+                f"💰 <b>Price:</b> {price} USD\n"
+                f"📊 <b>Market Capitalization:</b> {market_cap} USD\n\n"
+                f"📈 <b>24h High:</b> {high_24h} USD\n"
+                f"📉 <b>24h Low:</b> {low_24h} USD\n"
+                f"🔄 <b>24h Change:</b> {change_percentage_24h}%\n\n"
+                f"📅 <b>ATH Date:</b> {ath_date} ({ath} USD)\n"
+                f"📉 <b>ATL Date:</b> {atl_date} ({atl} USD)\n\n"
+                f"🔄 <b>Total Trading Volume:</b> {total_volume} USD\n"
+                f"🔄 <b>Circulating Supply:</b> {circulating_supply} {symbol}\n"
+                f"📅 <b>Last Update:</b> {date}\n"),
+        'ru'  : (f"📌 <b>{name}</b> (<code>{symbol}</code>)\n\n"
+                f"💰 <b>Цена:</b> {price} USD\n"
+                f"📊 <b>Рыночная капитализация:</b> {market_cap} USD\n\n"
+                f"📈 <b>Максимальная цена за 24 часа:</b> {high_24h} USD\n"
+                f"📉 <b>Минимальная цена за 24 часа:</b> {low_24h} USD\n"
+                f"🔄 <b>Изменение за 24 часа:</b> {change_percentage_24h}%\n\n"
+                f"📅 <b>Дата ATH:</b> {ath_date} ({ath} USD)\n"
+                f"📉 <b>Дата ATL:</b> {atl_date} ({atl} USD)\n\n"
+                f"🔄 <b>Общий объем торгов:</b> {total_volume} USD\n"
+                f"🔄 <b>Количество в обращении:</b> {circulating_supply} {symbol}\n"
+                f"📅 <b>Последнее обновление:</b> {date}\n")}
+    return text_language_dict[language]
